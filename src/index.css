@@ -6,6 +6,10 @@
     font-family: "Poppins", system-ui;
 }
 
+html{
+    scroll-behavior: smooth;
+}
+
 span{
     font-family: inherit;
     font-weight: inherit;
