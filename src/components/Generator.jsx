@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import SectionWrapper from './SectionWrapper'
 import {WORKOUTS, SCHEMES} from '../utils/swoldier'
+import Button from './Button'
 
 function Header(props) {
   const {index, title, description} = props
@@ -16,11 +17,11 @@ function Header(props) {
   )
 }
 
-function Generator() {
+function Generator(props) {
+  const {poison,setPoison,muscles,setMuscles,goal,setGoal,updateWorkout} = props
+   
   const [showModal, setShowModal] = useState(false)
-  const [poison, setPoison] = useState('individual')
-  const [muscles, setMuscles] = useState([])
-  const [goal, setGoal] = useState('strength_power')
+
 
   let toggleModal = () => {
     setShowModal(!showModal)
@@ -54,7 +55,7 @@ function Generator() {
           return(
             <button onClick={() =>{ 
               setMuscles([])
-              setPoison(type)}} className={'bg-slate-950 border py-3 rounded-lg duration-200 hover:border-blue-600 ' + (type === poison ? 'border-blue-600' : 'border-blue-400')} key={typeIndex}>
+              setPoison(type)}} className={'bg-slate-950 border px-4 py-3 rounded-lg duration-200 hover:border-blue-600 ' + (type === poison ? 'border-blue-600' : 'border-blue-400')} key={typeIndex}>
               <p className='capitalize'>{type.replace('_', ' ')}</p>
             </button>
           )
@@ -81,15 +82,16 @@ function Generator() {
       </div>
 
       <Header index={'03'} title={'Become Juggernaut'} description={'Select your ultimate objective.'}/>
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         {Object.keys(SCHEMES).map((scheme, schemeIndex) => {
           return(
-            <button onClick={() =>{ setGoal(scheme)}} className={'bg-slate-950 border py-3 rounded-lg duration-200 hover:border-blue-600 ' + (scheme === goal ? 'border-blue-600' : 'border-blue-400')} key={schemeIndex}>
+            <button onClick={() =>{ setGoal(scheme)}} className={'bg-slate-950 border px-4 py-3 rounded-lg duration-200 hover:border-blue-600 ' + (scheme === goal ? 'border-blue-600' : 'border-blue-400')} key={schemeIndex}>
             <p className='capitalize'>{scheme.replace('_', ' ')}</p>
           </button>
           )
         })}
       </div>
+      <Button text={'Formulate'} func={updateWorkout}/>
     </SectionWrapper>
   )
 }
